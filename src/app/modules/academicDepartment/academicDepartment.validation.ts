@@ -3,6 +3,7 @@ import { z } from 'zod';
 const createAcademicDepartmentValidation = z.object({
   body: z.object({
     name: z.string({
+      message: 'Name is Required',
       invalid_type_error: 'Academic faculty must be string',
     }),
     academicFaculty: z.string(),

@@ -31,6 +31,41 @@ const getSingleStudentFromDB = async (id: string) => {
   return result;
 };
 
+//update student
+
+//get single data from db
+const updateStudentFromDB = async (id: string, payload: Partial<TStudent>) => {
+  const { name, gurdian, localGurdian, ...remainingStudentData } = payload;
+
+  const modifiedUpdatedData: Record<string, unknown> = {
+    ...remainingStudentData,
+  };
+
+  //for name
+  if (name && Object.keys(name).length) {
+    for (const [key, value] of Object.entries(name)) {
+      modifiedUpdatedData[`name.${key}`] = value;
+    }
+  }
+  //for guardian
+  if (gurdian && Object.keys(gurdian).length) {
+    for (const [key, value] of Object.entries(gurdian)) {
+      modifiedUpdatedData[`gurdian.${key}`] = value;
+    }
+  }
+  //for localGuardian
+  if (localGurdian && Object.keys(localGurdian).length) {
+    for (const [key, value] of Object.entries(localGurdian)) {
+      modifiedUpdatedData[`localGurdian.${key}`] = value;
+    }
+  }
+  const result = await Student.findOneAndUpdate({ id }, modifiedUpdatedData, {
+    new: true,
+    runValidators: true,
+  });
+  return result;
+};
+
 const deleteStudentFromDB = async (id: string) => {
   const session = await mongoose.startSession();
 
@@ -72,4 +107,5 @@ export const StudentServices = {
   getAllStudentsFromDB,
   getSingleStudentFromDB,
   deleteStudentFromDB,
+  updateStudentFromDB,
 };

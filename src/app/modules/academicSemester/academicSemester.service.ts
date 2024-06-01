@@ -22,7 +22,7 @@ const getAllAcademicSemesterFromDB = async () => {
 //getting single data from db
 
 const getSingleSemesterFromDB = async (id: string) => {
-  const result = await AcademicSemester.findById(id);
+  const result = await AcademicSemester.findOne({ id });
   return result;
 };
 

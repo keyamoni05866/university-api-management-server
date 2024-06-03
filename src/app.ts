@@ -19,9 +19,10 @@ app.use('/api/v1', router);
 app.use(globalErrorHandler);
 app.use(notFound);
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('hello world');
-  return;
-});
+const test = async (req: Request, res: Response) => {
+  // Promise.reject();
+};
+
+app.get('/', test);
 
 export default app;

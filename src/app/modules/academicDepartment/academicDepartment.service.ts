@@ -10,7 +10,7 @@ const getAllAcademicDepartmentsFromDB = async () => {
   return result;
 };
 const getSingleAcademicDepartmentFromDB = async (id: string) => {
-  const result = await AcademicDepartment.findOne({ id }).populate(
+  const result = await AcademicDepartment.findById({ id }).populate(
     'academicFaculty',
   );
   return result;

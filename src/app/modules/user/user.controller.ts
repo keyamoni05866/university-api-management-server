@@ -1,6 +1,7 @@
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 import { UserServices } from './user.service';
 import catchAsync from '../../middlewares/utils/catchAsync';
+import httpStatus from 'http-status';
 
 const createStudent: RequestHandler = catchAsync(async (req, res) => {
   //data validation using joi
@@ -30,6 +31,21 @@ const createStudent: RequestHandler = catchAsync(async (req, res) => {
   });
 });
 
+///faculty
+
+const createFaculty = catchAsync(async (req, res) => {
+  const { password, faculty: facultyData } = req.body;
+
+  const result = await UserServices.createFacultyIntoDB(password, facultyData);
+
+  res.status(200).json({
+    success: true,
+    message: 'Faculty is created Successfully',
+    data: result,
+  });
+});
+
 export const UserControllers = {
   createStudent,
+  createFaculty,
 };

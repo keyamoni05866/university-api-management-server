@@ -199,3 +199,6 @@ export const StudentServices = {
   deleteStudentFromDB,
   updateStudentFromDB,
 };
+function search(studentSearchableField: string[]) {
+  throw new Error('Function not implemented.');
+}

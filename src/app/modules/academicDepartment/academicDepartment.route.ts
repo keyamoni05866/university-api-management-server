@@ -4,14 +4,16 @@ import validateRequest from '../../middlewares/validateRequest';
 
 import { AcademicDepartmentValidations } from './academicDepartment.validation';
 import { AcademicDepartmentControllers } from './academicDepartment.controller';
+import auth from '../../middlewares/auth';
 
 const router = express.Router();
 
 router.post(
   '/create-academic-department',
-  // validateRequest(
-  //   AcademicDepartmentValidations.createAcademicDepartmentValidation,
-  // ),
+  auth('admin'),
+  validateRequest(
+    AcademicDepartmentValidations.createAcademicDepartmentValidation,
+  ),
   AcademicDepartmentControllers.createAcademicDepartment,
 );
 router.get('/', AcademicDepartmentControllers.getAllAcademicDepartment);
@@ -21,6 +23,7 @@ router.get(
 );
 router.patch(
   '/:departmentId',
+  auth('admin'),
   validateRequest(
     AcademicDepartmentValidations.updateAcademicDepartmentValidation,
   ),
